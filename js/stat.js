@@ -67,7 +67,7 @@ function showStatistic(ctx, times) {
     if (i === 0) {
       ctx.fillStyle = colorUser;
     } else {
-      ctx.fillStyle = `hsl(240, 100%, ${getRandomIntInclusive(10, 90)}%)`;
+      ctx.fillStyle = 'hsl(240, 100%, ' + getRandomIntInclusive(10, 90) + '%)';
     }
     calculatedHigh = Math.floor((MAX_HEIGHT * times[i]) / maxTime);
 
