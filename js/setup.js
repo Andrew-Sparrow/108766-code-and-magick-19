@@ -6,7 +6,8 @@ var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
-var wizardEyeColor = document.querySelector('#wizard-eyes');
+var setupPlayer = document.querySelector('.setup-player');
+var wizardEyeColor = setupPlayer.querySelector('.wizard-eyes');
 
 // returned random integer
 function getRandomIntInclusive(min, max) {
@@ -159,6 +160,22 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var setEyeColor = function () {
+var add = (function () {
+  var counter = 0;
 
-};
+  return function () {
+    counter++;
+    if (counter === 3) {
+      counter = 0;
+    }
+
+    return counter;
+  };
+})();
+
+function changeEyesColor() {
+  var index = add();
+  wizardEyeColor.style.fill = eyesColors[index];
+}
+
+wizardEyeColor.addEventListener('click', changeEyesColor);
