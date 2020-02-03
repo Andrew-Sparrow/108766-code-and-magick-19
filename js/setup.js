@@ -8,6 +8,12 @@ var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 var setupPlayer = document.querySelector('.setup-player');
 var wizardEyeColor = setupPlayer.querySelector('.wizard-eyes');
+var wizardCoatColor = setupPlayer.querySelector('.wizard-coat ');
+var wizardFireBallColor = setupPlayer.querySelector('.setup-fireball-wrap');
+
+var coatColorForServer = setupPlayer.querySelector('#coat-color');
+var eyesColorForServer = setupPlayer.querySelector('#eyes-color');
+var fireballColorForServer = setupPlayer.querySelector('#fireball-color');
 
 // returned random integer
 function getRandomIntInclusive(min, max) {
@@ -160,22 +166,59 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var add = (function () {
-  var counter = 0;
+makeCounter.arrlength = eyesColors.length;
 
-  return function () {
-    counter++;
-    if (counter === 3) {
-      counter = 0;
+function makeCounter() {
+
+  counter.count = 1;
+
+  function counter() {
+    if (counter.count === makeCounter.arrlength) {
+      counter.count = 0;
     }
+    return counter.count++;
+  }
 
-    return counter;
-  };
-})();
+  return counter;
+}
+
+var makeCounterForEyes = makeCounter();
 
 function changeEyesColor() {
-  var index = add();
-  wizardEyeColor.style.fill = eyesColors[index];
+  wizardEyeColor.style.fill = eyesColors[makeCounterForEyes()];
+  eyesColorForServer.value = wizardEyeColor.style.fill;
 }
 
 wizardEyeColor.addEventListener('click', changeEyesColor);
+
+
+makeCounter.arrlength = coatColors.length;
+var makeCounterForCoat = makeCounter();
+
+function changeCoatColor() {
+  wizardCoatColor.style.fill = coatColors[makeCounterForCoat()];
+  coatColorForServer.value = wizardCoatColor.style.fill;
+}
+
+wizardCoatColor.addEventListener('click', changeCoatColor);
+
+
+makeCounter.arrLength = fireBallColors.length;
+var makeCounterForFireBalls = makeCounter();
+
+function changeFireBallColor() {
+  wizardFireBallColor.style.backgroundColor = fireBallColors[makeCounterForFireBalls()];
+  var bgColor = wizardFireBallColor.style.backgroundColor;
+  fireballColorForServer.value = rgb2hex(bgColor);
+}
+
+wizardFireBallColor.addEventListener('click', changeFireBallColor);
+
+function rgb2hex(rgb) {
+  rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
+  return '#' + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+function hex(x) {
+  return ('0' + parseInt(x, 10).toString(16)).slice(-2);
+}
