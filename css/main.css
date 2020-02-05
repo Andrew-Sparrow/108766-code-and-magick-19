@@ -693,6 +693,14 @@ input[type=radio]:checked + .review-mark-label
     box-shadow: 5px 5px 0 rgba(0, 0, 0, .5);
 }
 
+.setup-open-icon:focus {
+  border-bottom: solid 1px #000;
+  box-shadow: 0 0 20px #fff000;
+  outline: none;
+}
+
+
+
 .setup-title
 {
     padding: 20px;
