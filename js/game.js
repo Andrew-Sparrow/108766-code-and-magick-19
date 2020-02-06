@@ -494,6 +494,7 @@ window.Game = (function () {
         array[i] = array[j];
         array[j] = temp;
       }
+
       return array;
     },
 
