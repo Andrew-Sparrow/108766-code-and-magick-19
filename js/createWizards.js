@@ -1,13 +1,19 @@
 'use strict';
 
-(function crateWizards() {
+(function () {
 
   var wizardTemplateContainer = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
   var containerWizards = document.querySelector('.setup-similar-list');
+
   var AMOUNT_OF_WIZARDS = 4;
+
+  window.createWizards = {
+    amountOfWizards: AMOUNT_OF_WIZARDS,
+    fillContainer: fillContainer
+  };
 
   var listFirstNames = [
     'Иван',
@@ -59,13 +65,12 @@
   * returns new wizard
   *
   * */
-  function createWizard() {
+  function createWizard(wizard) {
     var newWizard = wizardTemplateContainer.cloneNode(true);
-    var firstNameWizard = listFirstNames[getRandomIntInclusive(0, listFirstNames.length - 1)];
-    var lastNameWizard = listLastNames[getRandomIntInclusive(0, listLastNames.length - 1)];
-    var wizardFullName = firstNameWizard + ' ' + lastNameWizard;
-    var wizardCoat = coatColors[getRandomIntInclusive(0, coatColors.length - 1)];
-    var wizardEye = eyesColors[getRandomIntInclusive(0, eyesColors.length - 1)];
+
+    var wizardFullName = wizard.name;
+    var wizardCoat = wizard.colorCoat;
+    var wizardEye = wizard.colorEyes;
 
     newWizard.querySelector('.wizard-coat').style.fill = wizardCoat;
     newWizard.querySelector('.wizard-eyes').style.fill = wizardEye;
@@ -80,15 +85,14 @@
   *@param {Number} times - how many times put the wizards in container.
   *
   */
-  function fillContainer(container, times) {
+  function fillContainer(wizards) {
     var fragment = new DocumentFragment();
-    for (var i = 0; i < times; i++) {
-      fragment.appendChild(createWizard());
-    }
-    container.appendChild(fragment);
-  }
 
-  fillContainer(containerWizards, AMOUNT_OF_WIZARDS);
+    for (var i = 0; i < AMOUNT_OF_WIZARDS; i++) {
+      fragment.appendChild(createWizard(wizards[i]));
+    }
+    containerWizards.appendChild(fragment);
+  }
 
   document.querySelector('.setup-similar')
     .classList
