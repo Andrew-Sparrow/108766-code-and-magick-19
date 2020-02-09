@@ -106,7 +106,7 @@
   window.backend.load(window.createWizards.fillContainer, errorHandler);
 
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), function (response) {
+    window.backend.save(new FormData(form), function () {
       userDialog.classList.add('hidden');
     }, errorHandler);
     evt.preventDefault();
