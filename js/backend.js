@@ -10,7 +10,20 @@
     save: save
   };
 
-  var URL = 'https://js.dump.academy/code-and-magick/data';
+  window.upload = function (data, onSuccess) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+
+    xhr.addEventListener('load', function () {
+      onSuccess(xhr.response);
+    });
+
+    xhr.open('POST', URL);
+    xhr.send(data);
+  };
+
+  var URLtoGetData = 'https://js.dump.academy/code-and-magick/data';
+  var URLtoSendForm = 'https://js.dump.academy/code-and-magick';
 
   var StatusCode = {
     OK: 200,
@@ -26,7 +39,7 @@
 
     xhr.responseType = 'json';
 
-    xhr.open('GET', URL);
+    xhr.open('GET', URLtoGetData);
 
     xhr.addEventListener('load', function () {
       var error;
@@ -83,7 +96,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('POST', URL);
+    xhr.open('POST', URLtoSendForm);
     xhr.send(data);
   }
 
@@ -103,10 +116,10 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.backend.load(window.createWizards.fillContainer, errorHandler);
+  load(window.createWizards.fillContainer, errorHandler);
 
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), function () {
+    save(new FormData(form), function () {
       userDialog.classList.add('hidden');
     }, errorHandler);
     evt.preventDefault();
