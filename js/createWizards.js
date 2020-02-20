@@ -48,7 +48,6 @@
     containerWizards.appendChild(fragment);
   }
 
-  document.querySelector('.setup-similar')
-    .classList
-    .remove('hidden');
+  document.querySelector('.setup-similar').classList.remove('hidden');
+
 })();
