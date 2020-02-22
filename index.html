@@ -63,7 +63,9 @@
   <div class="demo"></div>
 
   <div class="setup-open">
-    <img src="./img/user-1.jpg" class="setup-open-icon" tabindex="0">
+    <img src="./img/user-1.jpg"
+         class="setup-open-icon"
+         tabindex="0">
   </div>
 </header>
 
@@ -77,8 +79,10 @@
     <div class="setup-title">
       <div class="setup-user">
         <div class="upload">
-          <img class="setup-user-pic" src="./img/user-1.jpg"/>
-          <input type="file" name="avatar">
+          <img class="setup-user-pic"
+               src="./img/user-1.jpg"/>
+          <input type="file"
+                 name="avatar">
         </div>
         <label>
           <input type="text"
@@ -91,12 +95,18 @@
         </label>
       </div>
 
-      <span class="setup-close" tabindex="0">&times;</span>
+      <span class="setup-close"
+            tabindex="0">&times;</span>
     </div>
 
 
     <div class="setup-artifacts-shop">
-      <div class="setup-artifacts-cell"><img src="img/icon-star.png" alt="Star" width="65" height="50" draggable="true">
+      <div class="setup-artifacts-cell">
+        <img
+          src="img/icon-star.png"
+          alt="Star" width="65"
+          height="50"
+          draggable="true">
       </div>
       <div class="setup-artifacts-cell"></div>
       <div class="setup-artifacts-cell"></div>
@@ -166,8 +176,13 @@
 </div>
 
 <footer>
-  <p><a href="http://htmlacademy.ru" class="footer-link"><img src="img/htmlacademy-logo.png" alt="HTML Academy"
-                                                              width="130">Сделано в HTML Academy</a>в 2017 году</p>
+  <p>
+    <a href="http://htmlacademy.ru" class="footer-link">
+      <img src="img/htmlacademy-logo.png"
+           alt="HTML Academy"
+           width="130">Сделано в HTML Academy
+    </a>в 2017 году
+  </p>
 </footer>
 
 <template id="similar-wizard-template" style="display: none">
@@ -219,10 +234,12 @@
 </script>
 <script src="js/stat.js"></script>
 <script src="js/setup.js"></script>
-<script src="js/createWizards.js"></script>
-<script src="js/change_color.js"></script>
+<script src="js/load.js"></script>
+<script src="js/render.js"></script>
+<script src="js/wizard.js"></script>
+<script src="js/similar.js"></script>
+<script src="js/debounce.js"></script>
 <script src="js/game.js"></script>
-<script src="js/backend.js"></script>
 
 </body>
 </html>

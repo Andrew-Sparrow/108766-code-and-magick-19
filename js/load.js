@@ -2,27 +2,8 @@
 
 (function () {
 
-  var userDialog = document.querySelector('.setup');
-  var form = userDialog.querySelector('.setup-wizard-form');
+  var TIMEOUT_IN_MS = 3000; // 3s
 
-  window.backend = {
-    load: load,
-    save: save
-  };
-
-  window.upload = function (data, onSuccess) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-
-    xhr.addEventListener('load', function () {
-      onSuccess(xhr.response);
-    });
-
-    xhr.open('POST', URL);
-    xhr.send(data);
-  };
-
-  var URLtoGetData = 'https://js.dump.academy/code-and-magick/data';
   var URLtoSendForm = 'https://js.dump.academy/code-and-magick';
 
   var StatusCode = {
@@ -32,21 +13,22 @@
     notFound: 404
   };
 
-  var TIMEOUT_IN_MS = 3000; // 3s
+  window.load = function (url, onSuccess, onError) {
 
-  function load(onLoad, onError) {
+    url = url || URL;
+
     var xhr = new XMLHttpRequest();
 
     xhr.responseType = 'json';
 
-    xhr.open('GET', URLtoGetData);
+    xhr.open('GET', url);
 
     xhr.addEventListener('load', function () {
       var error;
 
       switch (xhr.status) {
         case StatusCode.OK:
-          onLoad(xhr.response);
+          onSuccess(xhr.response);
           break;
         case StatusCode.badRequest:
           error = StatusCode.badRequest + ' - Неверный запрос';
@@ -76,9 +58,9 @@
     });
 
     xhr.send();
-  }
+  };
 
-  function save(data, onLoad, onError) {
+  window.save = function (data, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -98,31 +80,6 @@
 
     xhr.open('POST', URLtoSendForm);
     xhr.send(data);
-  }
-
-  var errorHandler = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style =
-     'z-index: 100;' +
-     ' margin: 0 auto;' +
-     ' text-align: center;' +
-     ' background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
   };
-
-  load(window.createWizards.fillContainer, errorHandler);
-
-  form.addEventListener('submit', function (evt) {
-    save(new FormData(form), function () {
-      userDialog.classList.add('hidden');
-    }, errorHandler);
-    evt.preventDefault();
-  });
 
 })();
