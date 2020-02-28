@@ -1006,24 +1006,23 @@ input[type=radio]:checked + .review-mark-label
 
 .upload .setup-user-pic
 {
+    display: block;
+    margin: 0;
+
     position: absolute;
     top: 0;
     left: 0;
-
-    display: block;
-
-    margin: 0;
 }
 
 .upload input
 {
     position: absolute;
     z-index: 0;
-    top: 0;
-    left: 0;
+    opacity: 0;
 
     width: 100%;
     height: 100%;
 
-    opacity: 0;
+    left: 0;
+    top: 0;
 }
